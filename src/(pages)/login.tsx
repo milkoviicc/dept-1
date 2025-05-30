@@ -13,9 +13,8 @@ function Login() {
       return;
     }
     try {
-      const res = await axios.post('https://bootcamp2025.depster.me/login', {email, password});
+      const res = await axios.post('https://bootcamp2025.depster.me/login', {email, password}, {headers: {'Content-Type': 'application/json'}});
       alert("Successfully logged in!");
-
       console.log(res.data);
       localStorage.setItem('token', res.data.token);
       navigate('/home');
