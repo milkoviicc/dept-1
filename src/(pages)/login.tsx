@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const login = async() => {
 
     if(!email || !password) {
@@ -14,10 +14,7 @@ function Login() {
     }
     try {
       const res = await axios.post('https://bootcamp2025.depster.me/login', {email, password}, {headers: {'Content-Type': 'application/json'}});
-      alert("Successfully logged in!");
-      console.log(res.data);
-      localStorage.setItem('token', res.data.token);
-      navigate('/home');
+      console.log(res);
     } catch (error) {
       console.error("Error logging in", error);
     }
