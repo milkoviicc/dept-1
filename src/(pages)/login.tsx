@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
   
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function Login() {
       navigate('/');
     } catch (error) {
       console.error("Error logging in", error);
+      setError(true);
     }
 
   } 
@@ -35,13 +37,14 @@ function Login() {
   return (
     <div className='w-full h-full flex flex-col justify-center items-center'>
       <h1 className='text-center text-4xl'>Login</h1>
-      <form className='flex flex-col gap-2 my-8'>
+      <form className='flex flex-col gap-2 mt-8'>
         <label htmlFor="email">Email:</label>
         <input type="email" id='email' name='email' onChange={(e) => setEmail(e.target.value)} className='border border-white px-2 py-1 w-[300px] rounded-lg' required/>
         <label htmlFor="password">Password:</label>
         <input type="password" id='password' name='password' onChange={(e) => setPassword(e.target.value)} className='border border-white px-2 py-1 w-[300px] rounded-lg' required/>
-        <input type="submit" value="Submit" onClick={(e) => {e.preventDefault();login()}} className="py-2 px-8 my-8 w-fit rounded-lg bg-[#6b6b6b] text-white hover:opacity-50 duration-300 cursor-pointer"/>
+        <input type="submit" value="Submit" onClick={(e) => {e.preventDefault();login()}} className="py-2 px-8 mt-8 w-fit rounded-lg bg-[#6b6b6b] text-white hover:opacity-50 duration-300 cursor-pointer"/>
       </form>
+      {error && <p className='text-red-500 py-2'>Login failed. Please check your credentials.</p>}
     </div>
   )
 }
