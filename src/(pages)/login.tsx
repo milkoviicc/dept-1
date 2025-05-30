@@ -29,7 +29,7 @@ function Login() {
         <input type="email" id='email' name='email' onChange={(e) => setEmail(e.target.value)} className='border border-white px-2 py-1 w-[300px] rounded-lg' required/>
         <label htmlFor="password">Password:</label>
         <input type="password" id='password' name='password' onChange={(e) => setPassword(e.target.value)} className='border border-white px-2 py-1 w-[300px] rounded-lg' required/>
-        <input type="submit" value="Submit" onClick={() => login()} className="py-2 px-8 my-8 w-fit rounded-lg bg-[#6b6b6b] text-white hover:opacity-50 duration-300 cursor-pointer"/>
+        <input type="submit" value="Submit" onClick={(e) => {e.preventDefault();login()}} className="py-2 px-8 my-8 w-fit rounded-lg bg-[#6b6b6b] text-white hover:opacity-50 duration-300 cursor-pointer"/>
       </form>
     </div>
   )
