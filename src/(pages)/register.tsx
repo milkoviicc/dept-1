@@ -1,12 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [registered, setRegistered] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  useEffect(() =>{
+    navigate(registered ? '/login' : '/register');
+  }, [registered, navigate])
+
   const registerAcc = async() => {
 
     if(!email || !password) {
@@ -22,7 +28,6 @@ function Register() {
     } catch (error) {
       console.error("Error registering account:", error);
     }
-
   } 
 
   return (
@@ -35,6 +40,7 @@ function Register() {
         <input type="password" id='password' name='password' onChange={(e) => setPassword(e.target.value)} className='border border-white px-2 py-1 w-[300px] rounded-lg' required/>
         <input type="submit" value="Submit" onClick={(e) => {e.preventDefault();registerAcc()}} className="py-2 px-8 my-8 w-fit rounded-lg bg-[#6b6b6b] text-white hover:opacity-50 duration-300 cursor-pointer"/>
       </form>
+      <p>Have an account? <button onClick={() => setRegistered((prev) => !prev)}>Log in!</button></p>
     </div>
   )
 }
